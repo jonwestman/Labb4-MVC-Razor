@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Labb4_MVC_Razor.Models.BookList>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Add new loan</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Return book</th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateReturned)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsReturned)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <form asp-action="MarkReturned" method="post">
+                        <input type="submit" class="done-checkbox btn btn-primary" value="Return" />
+                        <input type="hidden" name="id" value="@item.BookListId" />
+                    </form>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateReturned)
+                </td>
+                <td>
+                    @(item.IsReturned ? "Yes" : "No")
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

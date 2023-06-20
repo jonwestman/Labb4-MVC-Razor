@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Labb4_MVC_Razor.Models.Customer>
+
+@{
+    ViewData["Title"] = "GetCustomer";
+}
+
+<h1>GetCustomer</h1>
+
+<p>
+    <a asp-action="CreateCustomer">Add new customer</a>
+</p>
+<form asp-action="GetCustomer">
+    <div class="form-group">
+        <label for="SearchString" class="control-label">Search for customer by lastname:</label>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+<hr />
+<a asp-action="GetCustomer">Remove search filter</a>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    <a asp-action="EditCustomer" asp-route-id="@item.CustomerId">Edit</a> |
+                    <a asp-action="DeleteCustomer" asp-route-id="@item.CustomerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
